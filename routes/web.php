@@ -15,9 +15,12 @@ Route::resource('articles', ArticleController::class)->only([
     'show',
     'edit',
     'update',
+    'destroy',
 ]);
 
 Route::resource('tags', TagController::class)->only([
+    'index',
     'create',
     'store',
+    'show',
 ]);

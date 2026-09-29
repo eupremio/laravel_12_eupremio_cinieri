@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Articoli')
+@section('title', $tag->name)
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Articoli</h1>
+        <h1>Articoli con tag: {{ $tag->name }}</h1>
 
-        <a href="{{ route('articles.create') }}" class="btn btn-primary">
-            Nuovo articolo
+        <a href="{{ route('tags.index') }}" class="btn btn-secondary">
+            Torna ai tag
         </a>
     </div>
 
-    @if ($articles->isEmpty())
+    @if ($tag->articles->isEmpty())
         <div class="alert alert-info">
-            Non ci sono ancora articoli.
+            Non ci sono articoli associati a questo tag.
         </div>
     @else
         <div class="row g-4">
-            @foreach ($articles as $article)
+            @foreach ($tag->articles as $article)
                 <div class="col-md-6">
                     <div class="card h-100">
                         <div class="card-body">
@@ -29,18 +29,8 @@
                                 {{ Str::limit($article->content, 150) }}
                             </p>
 
-                            @if ($article->tags->isNotEmpty())
-                                <div class="mb-3">
-                                    @foreach ($article->tags as $tag)
-                                        <a href="{{ route('tags.show', $tag) }}" class="badge text-bg-secondary text-decoration-none">
-                                            {{ $tag->name }}
-                                        </a>
-                                    @endforeach
-                                </div>
-                            @endif
-
                             <a href="{{ route('articles.show', $article) }}" class="btn btn-outline-primary">
-                                Leggi articolo
+                                Visualizza
                             </a>
 
                             <a href="{{ route('articles.edit', $article) }}" class="btn btn-outline-secondary">

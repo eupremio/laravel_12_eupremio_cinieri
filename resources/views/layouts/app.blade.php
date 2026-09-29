@@ -25,6 +25,10 @@
                     Nuovo articolo
                 </a>
 
+                <a class="btn btn-outline-light" href="{{ route('tags.index') }}">
+                    Tag
+                </a>
+
                 <a class="btn btn-outline-light" href="{{ route('tags.create') }}">
                     Nuovo tag
                 </a>

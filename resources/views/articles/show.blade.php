@@ -8,9 +8,9 @@
 
         <div class="mb-4">
             @foreach ($article->tags as $tag)
-                <span class="badge text-bg-secondary">
+                <a href="{{ route('tags.show', $tag) }}" class="badge text-bg-secondary text-decoration-none">
                     {{ $tag->name }}
-                </span>
+                </a>
             @endforeach
         </div>
 
@@ -21,6 +21,14 @@
         <a href="{{ route('articles.edit', $article) }}" class="btn btn-primary">
             Modifica articolo
         </a>
+
+        <form action="{{ route('articles.destroy', $article) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">
+                Cancella articolo
+            </button>
+        </form>
 
         <a href="{{ route('articles.index') }}" class="btn btn-secondary">
             Torna agli articoli

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function index()
+    {
+        $tags = Tag::all();
+
+        return view('tags.index', compact('tags'));
+    }
+
     public function create()
     {
         return view('tags.create');
@@ -20,6 +27,13 @@ class TagController extends Controller
 
         Tag::create($validated);
 
-        return redirect()->route('articles.index');
+        return redirect()->route('tags.index');
+    }
+
+    public function show(Tag $tag)
+    {
+        $tag->load('articles');
+
+        return view('tags.show', compact('tag'));
     }
 }
